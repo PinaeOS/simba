@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="bean.xsd">
+	<import url=""/>
+	<import url=""/>
+	<bean name="" class="" create="" run="" singleton="true">
+		<constructor>
+			<value class=""/>
+			<value/>
+		</constructor>
+	</bean>
+	<bean name="" class="" singleton="false" factory-bean="" factory-method="">
+		<property name="">
+			<reflection/>
+		</property>
+	</bean>
+	<bean name="" class="">
+		<property name="">
+			<value/>
+		</property>
+		<property name="">
+			<value>
+				<null/>
+			</value>
+		</property>
+	</bean>
+	<bean name="" class="">
+		<property name="">
+			<map class="">
+				<entity>
+					<key> </key>
+					<value> </value>
+				</entity>
+				<entity>
+					<key/>
+					<value/>
+				</entity>
+				<entity>
+					<key/>
+					<reflection/>
+				</entity>
+			</map>
+		</property>
+	</bean>
+	<bean name="" class="">
+		<property name="">
+			<list class="">
+				<value/>
+				<value/>
+				<reflection/>
+			</list>
+		</property>
+	</bean>
+	<bean name="" class="">
+		<property name="">
+			<set class="">
+				<value/>
+				<value/>
+				<reflection/>
+			</set>
+		</property>
+	</bean>
+	<bean name="" class="">
+		<property name="">
+			<collection class="">
+				<value>empty</value>
+				<value/>
+				<value/>
+				<reflection/>
+			</collection>
+		</property>
+	</bean>
+</beans>
