@@ -25,27 +25,119 @@ Maven
 
 demo for Simba:
 
-	public class DemoTestManager {
-		public static void main(String arg[]) throws Exception {
-			Task task = new Task();
-			Job job = new Job() {
-				public String getName() {
-					return "DelayJob";
-				}
-		
-				public boolean execute() throws JobException {
-					System.out.println("Now is : " + Long.toString(System.currentTimeMillis()));
-					return true;
-				}
-			};
-		
-			task.setName("HelloJob");
-			task.setJob(job);
-			task.setTrigger(new CronTrigger("0-30/5 * * * * * *"));
+XML File:
+
+	<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../bean.xsd">
+		<bean name="PersonFactory" class="org.pinae.simba.context.resource.Person"
+			factory-bean="org.pinae.simba.context.resource.PersonFactory" 
+			factory-method="getPerson"
+			create="create" run="run" singleton="true" 
+			timeout="3" destroy="destroy">
 			
-			TaskContainer container = new TaskContainer();
-			container.add(task);
-			container.start();
+			<property name="name">
+				<reflection>Name</reflection>
+			</property>
+			<property name="age">
+				<value>27</value>
+			</property>
+			<property name="email">
+				<value>interhui@21cn.com</value>
+			</property>
+			<property name="admin">
+				<value>true</value>
+			</property>
+		</bean>
+		
+		<bean name="Name" class="org.pinae.simba.context.resource.Person.Name">
+			<constructor>
+				<value>hui</value>
+				<value>yugeng</value>
+			</constructor>
+		</bean>
+		
+
+	</beans>
+
+Java Bean:
+
+	public class Person {
+		
+		private static Logger log = Logger.getLogger(Person.class);
+		
+		private Name name;
+		private int age;
+		private String email;
+		private boolean admin;
+	
+		public Name getName() {
+			return name;
+		}
+		public void setName(Name name) {
+			this.name = name;
+		}
+		public int getAge() {
+			return age;
+		}
+		public void setAge(int age) {
+			this.age = age;
+		}
+		public String getEmail() {
+			return email;
+		}
+		public void setEmail(String email) {
+			this.email = email;
+		}
+		public boolean isAdmin() {
+			return admin;
+		}
+		public void setAdmin(boolean admin) {
+			this.admin = admin;
+		}
+		public void create(){
+			log.debug("Create Person Bean");
+		}
+		public void run(){
+			this.age ++;
+		}
+		public void destroy(){
+			log.debug("Destory Person Bean");
+		}
+		
+		public class Name {
+			private String firstName;
+			private String lastName;
+			
+			public Name(String lastName, String firstName){
+				this.lastName = lastName;
+				this.firstName = firstName;
+			}
+			public String getFirstName() {
+				return firstName;
+			}
+			public void setFirstName(String firstName) {
+				this.firstName = firstName;
+			}
+			public String getLastName() {
+				return lastName;
+			}
+			public void setLastName(String lastName) {
+				this.lastName = lastName;
+			}
+		}
+	}
+
+
+Java Program:
+
+	public class DemoTestManager {
+	
+		private static Logger log = Logger.getLogger(DemoTestManager.class);
+	
+		public static void main(String arg[]) throws Exception {
+			ResourceContext bean = new FileSystemResourceContext("Person.xml");
+			Person person = (Person)bean.getBean("PersonFactory");
+			
+			logger.debug(person.getName().getLastName() + ":" + person.getEmail());
 		}
 	}
 	
