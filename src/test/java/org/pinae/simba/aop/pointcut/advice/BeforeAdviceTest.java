@@ -12,8 +12,8 @@ import org.pinae.simba.aop.BeforeAdvice;
  * @author 惠毓赓
  *
  */
-public class MyBeforeAdvice implements BeforeAdvice {
-	private static Logger logger = Logger.getLogger(MyBeforeAdvice.class);
+public class BeforeAdviceTest implements BeforeAdvice {
+	private static Logger logger = Logger.getLogger(BeforeAdviceTest.class);
 
 	public void before(Object target, Method method, Object[] args) {
 		String argType = "";

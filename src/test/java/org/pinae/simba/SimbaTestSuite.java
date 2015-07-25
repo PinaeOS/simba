@@ -29,7 +29,7 @@ public class SimbaTestSuite {
 	private static Logger logger = Logger.getLogger(SimbaTestSuite.class);
 	
 	public static Test suite() {
-		TestSuite suite = new TestSuite("Test Simba");
+		TestSuite suite = new TestSuite("Simba-Test");
 		//基础映射测试
 		suite.addTest(new JUnit4TestAdapter(BasicTest.class));
 		//Collection映射测试

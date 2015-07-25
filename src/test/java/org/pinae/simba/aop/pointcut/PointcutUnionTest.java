@@ -6,7 +6,7 @@ import org.aopalliance.aop.Advice;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.pinae.simba.aop.Pointcut;
-import org.pinae.simba.aop.pointcut.advice.MyAroundAdvice;
+import org.pinae.simba.aop.pointcut.advice.AroundAdviceTest;
 import org.pinae.simba.aop.pointcut.resource.ITarget;
 import org.pinae.simba.aop.pointcut.resource.MyTarget;
 import org.pinae.simba.aop.proxy.ProxyFactory;
@@ -35,7 +35,7 @@ public class PointcutUnionTest {
 		Pointcut point2 = advisor2.getPointcut();
 		
 		DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor();
-		advisor.setAdvice(new MyAroundAdvice());
+		advisor.setAdvice(new AroundAdviceTest());
 		advisor.setPointcut(PointcutUtil.union(point1, point2));
 		
 		ProxyFactory proxyFactory= new ProxyFactory();

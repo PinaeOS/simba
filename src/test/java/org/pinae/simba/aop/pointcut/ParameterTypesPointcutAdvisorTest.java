@@ -6,7 +6,7 @@ import org.aopalliance.aop.Advice;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.pinae.simba.aop.pointcut.ParameterTypesPointcutAdvisor;
-import org.pinae.simba.aop.pointcut.advice.MyAfterAdvice;
+import org.pinae.simba.aop.pointcut.advice.AfterAdviceTest;
 import org.pinae.simba.aop.pointcut.resource.ITarget;
 import org.pinae.simba.aop.pointcut.resource.MyTarget;
 import org.pinae.simba.aop.proxy.ProxyFactory;
@@ -28,7 +28,7 @@ public class ParameterTypesPointcutAdvisorTest {
 		
 		//只要执行的方法参数为String则进行切入
 		ParameterTypesPointcutAdvisor after= new ParameterTypesPointcutAdvisor();
-		after.setAdvice(new MyAfterAdvice());
+		after.setAdvice(new AfterAdviceTest());
 		after.setClass("java.lang.String");
 		
 		ProxyFactory proxyFactory= new ProxyFactory();

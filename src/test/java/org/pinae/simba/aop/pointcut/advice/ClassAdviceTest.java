@@ -9,8 +9,8 @@ import org.pinae.simba.aop.ClassAdvice;
  * @author Huiyugeng
  *
  */
-public class MyClassAdvice implements ClassAdvice {
-	private static Logger logger = Logger.getLogger(MyClassAdvice.class);
+public class ClassAdviceTest implements ClassAdvice {
+	private static Logger logger = Logger.getLogger(ClassAdviceTest.class);
 	
 	public Object load(Object target) {
 		logger.debug("Class Target : " + target.getClass().getName());

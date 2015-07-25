@@ -6,7 +6,7 @@ import org.aopalliance.aop.Advice;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.pinae.simba.aop.pointcut.RegexPointcutAdvisor;
-import org.pinae.simba.aop.pointcut.advice.MyAroundAdvice;
+import org.pinae.simba.aop.pointcut.advice.AroundAdviceTest;
 import org.pinae.simba.aop.pointcut.resource.ITarget;
 import org.pinae.simba.aop.pointcut.resource.MyTarget;
 import org.pinae.simba.aop.proxy.ProxyFactory;
@@ -27,7 +27,7 @@ public class RegexPointcutAdvisorTest {
 		logger.debug("RegexPointcutAdvisor Test");
 		
 		RegexPointcutAdvisor around = new RegexPointcutAdvisor();
-		around.setAdvice(new MyAroundAdvice());
+		around.setAdvice(new AroundAdviceTest());
 		around.setPattern("ayHell*");
 		
 		ProxyFactory proxyFactory= new ProxyFactory();

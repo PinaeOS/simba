@@ -14,8 +14,8 @@ import org.pinae.simba.aop.AfterAdvice;
  * @author Huiyugeng
  *
  */
-public class MyAfterAdvice implements AfterAdvice {
-	private static Logger logger = Logger.getLogger(MyAfterAdvice.class);
+public class AfterAdviceTest implements AfterAdvice {
+	private static Logger logger = Logger.getLogger(AfterAdviceTest.class);
 	
 	public void after(Object target, Method method, Object[] args) {
 		String argType = "";

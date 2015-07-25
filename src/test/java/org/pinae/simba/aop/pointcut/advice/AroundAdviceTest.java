@@ -10,8 +10,8 @@ import org.apache.log4j.Logger;
  * @author Huiyugeng
  *
  */
-public class MyAroundAdvice implements MethodInterceptor{
-	private static Logger logger = Logger.getLogger(MyAroundAdvice.class);
+public class AroundAdviceTest implements MethodInterceptor{
+	private static Logger logger = Logger.getLogger(AroundAdviceTest.class);
 
 	public Object invoke(MethodInvocation invocation) throws Throwable {
 		

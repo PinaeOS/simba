@@ -6,7 +6,7 @@ import org.aopalliance.aop.Advice;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.pinae.simba.aop.pointcut.TrackTracePointcutAdvisor;
-import org.pinae.simba.aop.pointcut.advice.MyBeforeAdvice;
+import org.pinae.simba.aop.pointcut.advice.BeforeAdviceTest;
 import org.pinae.simba.aop.pointcut.resource.ITarget;
 import org.pinae.simba.aop.pointcut.resource.MyTarget;
 import org.pinae.simba.aop.proxy.ProxyFactory;
@@ -27,7 +27,7 @@ public class TrackTracePointcutAdvisorTest {
 		logger.debug("TrackTracePointcutAdvisor Test");
 		
 		TrackTracePointcutAdvisor before = new TrackTracePointcutAdvisor();
-		before.setAdvice(new MyBeforeAdvice());
+		before.setAdvice(new BeforeAdviceTest());
 		before.setClassName("org.pinae.zazu.aop.proxy.DefaultProxyFactory");
 		
 		ProxyFactory proxyFactory= new ProxyFactory();
