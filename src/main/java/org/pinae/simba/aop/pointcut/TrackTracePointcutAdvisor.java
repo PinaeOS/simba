@@ -48,6 +48,7 @@ public class TrackTracePointcutAdvisor extends AbstractPointcutAdvisor {
 				}
 			}
 
+			@SuppressWarnings("rawtypes")
 			public boolean matcher(Class clazz) {
 				if(className!=null){
 					return isMatchStackTrace(className, null);

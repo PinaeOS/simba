@@ -25,6 +25,7 @@ final public class PointcutUtil {
 				return (point1.matcher(method, arg) && point2.matcher(method, arg));
 			}
 
+			@SuppressWarnings("rawtypes")
 			public boolean matcher(Class clazz) {
 				return (point1.matcher(clazz) && point2.matcher(clazz));
 			}

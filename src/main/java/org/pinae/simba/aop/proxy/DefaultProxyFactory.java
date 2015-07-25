@@ -70,7 +70,7 @@ final class DefaultProxyFactory implements InvocationHandler{
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		Object result = null;
 		
-		for(Iterator beforeIterator = methodBeforeIntercepyor.iterator();beforeIterator.hasNext();){
+		for(Iterator<?> beforeIterator = methodBeforeIntercepyor.iterator();beforeIterator.hasNext();){
 			PointcutAdvisor beforeAdvice = (PointcutAdvisor)beforeIterator.next();
 			if(beforeAdvice.getPointcut().matcher(method, args)){
 				((BeforeAdvice)beforeAdvice.getAdvice()).before(target, method, args);
@@ -80,7 +80,7 @@ final class DefaultProxyFactory implements InvocationHandler{
 			if(methodAroundIntercepyor==null|| methodAroundIntercepyor.size()==0){
 				result = method.invoke(target, args);
 			}else{
-				for(Iterator aroundIterator = methodAroundIntercepyor.iterator();aroundIterator.hasNext();){
+				for(Iterator<?> aroundIterator = methodAroundIntercepyor.iterator();aroundIterator.hasNext();){
 					PointcutAdvisor aroundAdvice = (PointcutAdvisor)aroundIterator.next();
 					if(aroundAdvice.getPointcut().matcher(method, args)){
 						result = ((MethodInterceptor)aroundAdvice.getAdvice()).invoke(new DefaultMethodInvocation(target, method, args));
@@ -88,14 +88,14 @@ final class DefaultProxyFactory implements InvocationHandler{
 				}
 			}
 		}catch(Exception e){
-			for(Iterator throwsIterator = methodThrowsIntercepyor.iterator();throwsIterator.hasNext();){
+			for(Iterator<?> throwsIterator = methodThrowsIntercepyor.iterator();throwsIterator.hasNext();){
 				PointcutAdvisor throwsAdvice = (PointcutAdvisor)throwsIterator.next();
 				if(throwsAdvice.getPointcut().matcher(method, args)){
 					((ThrowsAdvice)throwsAdvice.getAdvice()).afterThrowing(target, method, args);
 				}
 			}
 		}finally{
-			for(Iterator afterIterator = methodAfterIntercepyor.iterator();afterIterator.hasNext();){
+			for(Iterator<?> afterIterator = methodAfterIntercepyor.iterator();afterIterator.hasNext();){
 				PointcutAdvisor afterAdvice = (PointcutAdvisor)afterIterator.next();
 				if(afterAdvice.getPointcut().matcher(method, args)){
 					((AfterAdvice)afterAdvice.getAdvice()).after(target, method, args);
@@ -110,9 +110,10 @@ final class DefaultProxyFactory implements InvocationHandler{
 	 * 
 	 * @return 织入通知后的对象
 	 */
+	@SuppressWarnings("rawtypes")
 	public Object getObject(){
 		Object objReturn =  new Object();
-		for(Iterator classIterator = classIntercepyor.iterator();classIterator.hasNext();){
+		for(Iterator<?> classIterator = classIntercepyor.iterator();classIterator.hasNext();){
 			PointcutAdvisor classAdvice = (PointcutAdvisor)classIterator.next();
 			if(classAdvice.getPointcut().matcher(target.getClass())){
 				target = ((ClassAdvice)classAdvice.getAdvice()).load(target);

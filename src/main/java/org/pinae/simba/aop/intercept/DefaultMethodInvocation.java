@@ -13,7 +13,7 @@ import org.aopalliance.intercept.MethodInvocation;
  * @author Huiyugeng
  *
  */
-public class DefaultMethodInvocation implements MethodInvocation{
+public class DefaultMethodInvocation implements MethodInvocation {
 	private Object target;
 	private Method method;
 	private Object[] args;
@@ -21,7 +21,7 @@ public class DefaultMethodInvocation implements MethodInvocation{
 	/**
 	 * 构造函数
 	 * 
-	 * @param target 包含指定方法的对象 
+	 * @param target 包含指定方法的对象
 	 * @param method 指定调用的方法
 	 * @param args 指定方法的参数值
 	 */
@@ -35,21 +35,17 @@ public class DefaultMethodInvocation implements MethodInvocation{
 		return method;
 	}
 
-
 	public Object[] getArguments() {
 		return args;
 	}
-
 
 	public AccessibleObject getStaticPart() {
 		return null;
 	}
 
-
 	public Object getThis() {
 		return target;
 	}
-
 
 	public Object proceed() {
 		Object result = null;

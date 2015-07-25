@@ -9,6 +9,7 @@ import java.lang.reflect.Method;
  *
  */
 public interface Pointcut {
+	
 	/**
 	 * 判断指定的方法是否满足做为切入点的条件
 	 * 
@@ -17,11 +18,13 @@ public interface Pointcut {
 	 * @return 是否满足做为切入点
 	 */
 	public boolean matcher(Method method, Object arg[]);
+	
 	/**
 	 * 判断装入的类是否满足做为切入点的条件
 	 * 
 	 * @param clazz 需要切入的类
 	 * @return 是否满足做为切入点
 	 */
+	@SuppressWarnings("rawtypes")
 	public boolean matcher(Class clazz);
 }

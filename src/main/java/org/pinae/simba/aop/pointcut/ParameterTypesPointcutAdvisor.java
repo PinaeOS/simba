@@ -36,6 +36,7 @@ public class ParameterTypesPointcutAdvisor extends AbstractPointcutAdvisor {
 				return false;	
 			}
 			
+			@SuppressWarnings("rawtypes")
 			public boolean matcher(Class clazz) {
 				throw new UnsupportedOperationException("Illegal Class Filter usage");
 			}

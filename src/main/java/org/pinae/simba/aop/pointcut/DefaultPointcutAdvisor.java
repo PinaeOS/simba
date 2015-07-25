@@ -7,6 +7,6 @@ package org.pinae.simba.aop.pointcut;
  * @author Huiyugeng
  *
  */
-public class DefaultPointcutAdvisor extends AbstractPointcutAdvisor{
+public class DefaultPointcutAdvisor extends AbstractPointcutAdvisor {
 
 }
