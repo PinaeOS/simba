@@ -1,4 +1,4 @@
-#Simba#
+#simba#
 
 Simba is dependency injection framework for Java
 
