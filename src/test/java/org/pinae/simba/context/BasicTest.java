@@ -45,8 +45,7 @@ public class BasicTest {
 		} catch (InvokeException e) {
 			fail(e.getMessage());
 		} catch (NoFoundException e) {
-			//fail(e.getMessage());
-			e.printStackTrace();
+			fail(e.getMessage());
 		} catch (InterruptedException e) {
 			fail(e.getMessage());
 		}

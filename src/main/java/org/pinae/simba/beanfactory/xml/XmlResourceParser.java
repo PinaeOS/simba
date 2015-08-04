@@ -43,7 +43,7 @@ public class XmlResourceParser implements XmlConstant, CollectionConstant{
 	 * @return 返回XML配置
 	 * @throws XMLParseException XML解析发生的异常
 	 */
-	public static Resource getConfig(InputStream xml, boolean validateXml) throws XMLParseException{
+	public static Resource getConfig(InputStream xml, boolean validateXml) throws XMLParseException {
 		try {
 			builder = new SAXBuilder(validateXml);
 			
@@ -77,7 +77,7 @@ public class XmlResourceParser implements XmlConstant, CollectionConstant{
 					String url = bean.getAttributeValue(URL);
 					importResource = XmlResourceParser.getConfig(new FileInputStream(url), validateXml);
 				} catch (FileNotFoundException e) {
-					e.printStackTrace();
+					throw new XMLParseException(e);
 				}
 				importConfig.mergeResource(beansLibrary, importResource);
 			}else if(bean.getName().equalsIgnoreCase(BEAN)){
