@@ -7,13 +7,10 @@ package org.pinae.simba.aop.pointcut.resource;
  *
  */
 public interface ITarget {
-	/**
-	 * 说Hello
-	 * 
-	 * @param name 姓名
-	 * @return 问候
-	 */
+
 	public String sayHello(String name);
 	
 	public String sayHello(int age);
+	
+	public int getAge(int age);
 }

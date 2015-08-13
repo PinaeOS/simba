@@ -1,7 +1,13 @@
 <?xml version="1.0"?>
-<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="bean.xsd">
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="resource/bean.xsd">
 	<import url=""/>
 	<import url=""/>
+	
+	<aop name="">
+		<target></target>
+		<intercept></intercept>
+	</aop>
+	
 	<bean name="" class="" create="" run="" singleton="true">
 		<constructor>
 			<value class=""/>

@@ -5,13 +5,10 @@ import static org.junit.Assert.assertEquals;
 import org.aopalliance.aop.Advice;
 import org.apache.log4j.Logger;
 import org.junit.Test;
-import org.pinae.simba.aop.pointcut.TrackTracePointcutAdvisor;
 import org.pinae.simba.aop.pointcut.advice.BeforeAdviceTest;
 import org.pinae.simba.aop.pointcut.resource.ITarget;
 import org.pinae.simba.aop.pointcut.resource.MyTarget;
 import org.pinae.simba.aop.proxy.ProxyFactory;
-import org.pinae.simba.aop.target.DefaultTarget;
-import org.pinae.simba.aop.target.Target;
 
 /**
  * 根据方法运行的调用栈中包含特定的类中的方法来对切入点匹配测试
@@ -31,10 +28,8 @@ public class TrackTracePointcutAdvisorTest {
 		before.setClassName("org.pinae.zazu.aop.proxy.DefaultProxyFactory");
 		
 		ProxyFactory proxyFactory= new ProxyFactory();
-		Target myTarget = new DefaultTarget();
-		myTarget.setTarget(new MyTarget());
-		proxyFactory.setTarget(myTarget);
 		
+		proxyFactory.setTarget(new MyTarget());
 		proxyFactory.setIntercepyor(new Advice[]{before});
 		
 		ITarget target = (ITarget)proxyFactory.getObject();

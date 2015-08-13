@@ -10,18 +10,18 @@ import org.apache.log4j.Logger;
  * @author Huiyugeng
  *
  */
-public class AroundAdviceTest implements MethodInterceptor{
+public class AroundAdviceTest implements MethodInterceptor {
 	private static Logger logger = Logger.getLogger(AroundAdviceTest.class);
 
 	public Object invoke(MethodInvocation invocation) throws Throwable {
-		
+
 		Object args[] = invocation.getArguments();
-		
+
 		String argType = "";
-		if(args.length>=0){
+		if (args.length >= 0) {
 			argType = args[0].getClass().getName();
 		}
-		
+
 		logger.debug("Around before the method :" + invocation.getMethod().getName() + "; args type : " + argType);
 		Object object = invocation.proceed();
 		logger.debug("Around after the method :" + invocation.getMethod().getName() + "; args type : " + argType);

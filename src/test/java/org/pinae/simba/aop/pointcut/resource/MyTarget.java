@@ -7,17 +7,16 @@ package org.pinae.simba.aop.pointcut.resource;
  *
  */
 public class MyTarget implements ITarget{
-	/**
-	 * 说Hello
-	 * 
-	 * @param name 姓名
-	 * @return 问候
-	 */
+
 	public String sayHello(String name){
 		return "Hello " + name;
 	}
 
 	public String sayHello(int age) {
 		return age + " years old";
+	}
+	
+	public int getAge(int age) {
+		return age - 5;
 	}
 }

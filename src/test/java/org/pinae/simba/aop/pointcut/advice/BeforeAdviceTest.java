@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 import org.apache.log4j.Logger;
 import org.pinae.simba.aop.BeforeAdvice;
 
-
 /**
  * BeforeAdvice的例子
  * 
@@ -17,10 +16,10 @@ public class BeforeAdviceTest implements BeforeAdvice {
 
 	public void before(Object target, Method method, Object[] args) {
 		String argType = "";
-		if(args.length>=0){
+		if (args.length >= 0) {
 			argType = args[0].getClass().getName();
 		}
-		logger.debug("After the method : " + method.getName() + "; args type : " + argType);
+		logger.debug("Before the method : " + method.getName() + "; args type : " + argType);
 	}
 
 }

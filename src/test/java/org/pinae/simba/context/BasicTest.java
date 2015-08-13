@@ -10,7 +10,7 @@ import org.pinae.simba.context.ResourceContext;
 import org.pinae.simba.context.resource.Person;
 import org.pinae.simba.exception.InvokeException;
 import org.pinae.simba.exception.NoFoundException;
-import org.pinae.simba.exception.XMLParseException;
+import org.pinae.simba.exception.XmlParseException;
 
 
 public class BasicTest {
@@ -24,7 +24,7 @@ public class BasicTest {
 			bean = new FileSystemResourceContext(SimbaTestConstant.TEST_XML);
 		} catch (NoFoundException e) {
 			fail(e.getMessage());
-		} catch (XMLParseException e) {
+		} catch (XmlParseException e) {
 			fail(e.getMessage());
 		}
 		

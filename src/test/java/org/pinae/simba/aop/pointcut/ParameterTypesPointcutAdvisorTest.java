@@ -5,13 +5,10 @@ import static org.junit.Assert.assertEquals;
 import org.aopalliance.aop.Advice;
 import org.apache.log4j.Logger;
 import org.junit.Test;
-import org.pinae.simba.aop.pointcut.ParameterTypesPointcutAdvisor;
 import org.pinae.simba.aop.pointcut.advice.AfterAdviceTest;
 import org.pinae.simba.aop.pointcut.resource.ITarget;
 import org.pinae.simba.aop.pointcut.resource.MyTarget;
 import org.pinae.simba.aop.proxy.ProxyFactory;
-import org.pinae.simba.aop.target.DefaultTarget;
-import org.pinae.simba.aop.target.Target;
 
 /**
  * 调用方法的参数类型对切入点匹配测试
@@ -32,10 +29,7 @@ public class ParameterTypesPointcutAdvisorTest {
 		after.setClass("java.lang.String");
 		
 		ProxyFactory proxyFactory= new ProxyFactory();
-		Target myTarget = new DefaultTarget();
-		myTarget.setTarget(new MyTarget());
-		proxyFactory.setTarget(myTarget);
-		
+		proxyFactory.setTarget(new MyTarget());
 		proxyFactory.setIntercepyor(new Advice[]{after});
 		
 		ITarget target = (ITarget)proxyFactory.getObject();
