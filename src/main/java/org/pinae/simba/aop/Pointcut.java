@@ -25,6 +25,5 @@ public interface Pointcut {
 	 * @param clazz 需要切入的类
 	 * @return 是否满足做为切入点
 	 */
-	@SuppressWarnings("rawtypes")
-	public boolean matcher(Class clazz);
+	public boolean matcher(Class<?> clazz);
 }

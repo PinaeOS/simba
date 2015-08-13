@@ -9,7 +9,7 @@ import java.net.URL;
 import org.pinae.simba.beanfactory.xml.XmlBeanFactory;
 import org.pinae.simba.exception.InvokeException;
 import org.pinae.simba.exception.NoFoundException;
-import org.pinae.simba.exception.XMLParseException;
+import org.pinae.simba.exception.XmlParseException;
 
 /**
  * 从XML文件获得Bean资源
@@ -29,10 +29,10 @@ public class FileSystemResourceContext extends XmlBeanFactory implements
 	 * @param filename XML文件名
 	 * 
 	 * @throws NoFoundException 文件未找到异常处理
-	 * @throws XMLParseException XML解析异常处理
+	 * @throws XmlParseException XML解析异常处理
 	 */
 	
-	public FileSystemResourceContext(String filename) throws NoFoundException, XMLParseException{
+	public FileSystemResourceContext(String filename) throws NoFoundException, XmlParseException{
 		this(filename, true);
 	}
 	
@@ -43,9 +43,9 @@ public class FileSystemResourceContext extends XmlBeanFactory implements
 	 * @param validateXml 验证XML
 	 * 
 	 * @throws NoFoundException 文件未找到异常处理
-	 * @throws XMLParseException XML解析异常处理
+	 * @throws XmlParseException XML解析异常处理
 	 */
-	public FileSystemResourceContext(String filename, boolean validateXml) throws NoFoundException, XMLParseException{
+	public FileSystemResourceContext(String filename, boolean validateXml) throws NoFoundException, XmlParseException{
 		this.filename = filename;
 		
 		try {
@@ -65,9 +65,9 @@ public class FileSystemResourceContext extends XmlBeanFactory implements
 	 * @param schemaFile 验证文件
 	 * 
 	 * @throws NoFoundException 文件未找到异常处理
-	 * @throws XMLParseException XML解析异常处理
+	 * @throws XmlParseException XML解析异常处理
 	 */
-	public FileSystemResourceContext(String filename, String schemaFile) throws NoFoundException, XMLParseException{
+	public FileSystemResourceContext(String filename, String schemaFile) throws NoFoundException, XmlParseException{
 		this.filename = filename;
 		try {
 			this.xmlStream = new FileInputStream(this.filename);

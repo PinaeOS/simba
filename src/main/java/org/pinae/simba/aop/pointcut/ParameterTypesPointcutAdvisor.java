@@ -4,7 +4,6 @@ import java.lang.reflect.Method;
 
 import org.pinae.simba.aop.Pointcut;
 
-
 /**
  * 通过调用方法的参数类型对切入点进行匹配
  * 
@@ -23,21 +22,26 @@ public class ParameterTypesPointcutAdvisor extends AbstractPointcutAdvisor {
 		this.className = className;
 	}
 	
+	public void setClass(Class<?> clazz) {
+		if (clazz != null) {
+			this.className = clazz.getName();
+		}
+	}
+
 	public Pointcut getPointcut() {
-		return new DefaultPointcut(){
+		return new DefaultPointcut() {
 			public boolean matcher(Method method, Object[] args) {
-				if(className!=null && !className.equals("")){
-					for(int i=0;i<args.length;i++){
-						if(args[i].getClass().getName().equals(className)){
+				if (className != null && !className.equals("")) {
+					for (int i = 0; i < args.length; i++) {
+						if (args[i].getClass().getName().equals(className)) {
 							return true;
 						}
 					}
 				}
-				return false;	
+				return false;
 			}
-			
-			@SuppressWarnings("rawtypes")
-			public boolean matcher(Class clazz) {
+
+			public boolean matcher(Class<?> clazz) {
 				throw new UnsupportedOperationException("Illegal Class Filter usage");
 			}
 		};

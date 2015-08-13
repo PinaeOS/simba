@@ -37,8 +37,7 @@ public class DefaultPointcut implements Pointcut {
 		return methodMatcher;
 	}
 
-	@SuppressWarnings("rawtypes")
-	public boolean matcher(Class clazz) {
+	public boolean matcher(Class<?> clazz) {
 		return classMatcher;
 	}
 

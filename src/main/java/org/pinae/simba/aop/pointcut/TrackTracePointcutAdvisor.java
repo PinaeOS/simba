@@ -4,7 +4,6 @@ import java.lang.reflect.Method;
 
 import org.pinae.simba.aop.Pointcut;
 
-
 /**
  * 根据方法运行的调用栈中是否包含特定的类中的方法来对切入点进行匹配
  * 
@@ -23,7 +22,7 @@ public class TrackTracePointcutAdvisor extends AbstractPointcutAdvisor {
 	public void setClassName(String className) {
 		this.className = className;
 	}
-	
+
 	/**
 	 * 设置调用栈中指定的类的方法
 	 * 
@@ -37,36 +36,35 @@ public class TrackTracePointcutAdvisor extends AbstractPointcutAdvisor {
 
 		return new DefaultPointcut() {
 			public boolean matcher(Method method, Object[] arg) {
-				if(className!=null){
-					if(methodName!=null && !methodName.equals("")){
+				if (className != null) {
+					if (methodName != null && !methodName.equals("")) {
 						return isMatchStackTrace(className, methodName);
-					}else{
+					} else {
 						return isMatchStackTrace(className, null);
 					}
-				}else{
+				} else {
 					return false;
 				}
 			}
 
-			@SuppressWarnings("rawtypes")
-			public boolean matcher(Class clazz) {
-				if(className!=null){
+			public boolean matcher(Class<?> clazz) {
+				if (className != null) {
 					return isMatchStackTrace(className, null);
-				}else{
+				} else {
 					return false;
 				}
-				
+
 			}
-			
-			private boolean isMatchStackTrace(String className,String methodName){
+
+			private boolean isMatchStackTrace(String className, String methodName) {
 				StackTraceElement stack[] = (new Throwable()).getStackTrace();
 				for (int i = 0; i < stack.length; i++) {
 					StackTraceElement ste = stack[i];
-					if(ste.getClassName().equals(className)){
-						if(methodName!=null){
-							if(ste.getMethodName().equals(methodName)){
+					if (ste.getClassName().equals(className)) {
+						if (methodName != null) {
+							if (ste.getMethodName().equals(methodName)) {
 								return true;
-							}else{
+							} else {
 								return false;
 							}
 						}

@@ -11,6 +11,10 @@ public interface KernelConstant {
 	static final String CLASS = "class";
 	static final String IMPORT = "import";
 	static final String URL = "url";
+	static final String AOP = "aop";
+	static final String AOP_TARGET = "target";
+	static final String AOP_INTERCEPYOT = "intercepyor";
+	static final String AOP_ADVICE = "advice";
 	static final String BEAN = "bean";
 	static final String CREATE = "create";
 	static final String RUN = "run";

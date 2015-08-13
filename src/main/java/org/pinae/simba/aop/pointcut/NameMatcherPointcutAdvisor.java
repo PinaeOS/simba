@@ -1,7 +1,6 @@
 package org.pinae.simba.aop.pointcut;
 
 import java.lang.reflect.Method;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,6 +13,7 @@ import org.pinae.simba.aop.Pointcut;
  *
  */
 public class NameMatcherPointcutAdvisor extends AbstractPointcutAdvisor {
+
 	private List<String> mappedNames = new LinkedList<String>();
 
 	/**
@@ -36,26 +36,24 @@ public class NameMatcherPointcutAdvisor extends AbstractPointcutAdvisor {
 
 	public Pointcut getPointcut() {
 		return new DefaultPointcut() {
-			@SuppressWarnings("rawtypes")
 			public boolean matcher(Method method, Object[] args) {
 				String methodName = method.getName();
-				for (Iterator iterMappedNames = mappedNames.iterator(); iterMappedNames.hasNext();) {
-					if (!methodName.equals((String) iterMappedNames.next())) {
-						return false;
+				for (String mappedName : mappedNames) {
+					if (methodName.equals(mappedName)) {
+						return true;
 					}
 				}
-				return true;
+				return false;
 			}
 
-			@SuppressWarnings("rawtypes")
-			public boolean matcher(Class clazz) {
+			public boolean matcher(Class<?> clazz) {
 				String className = clazz.getName();
-				for (Iterator iterMappedNames = mappedNames.iterator(); iterMappedNames.hasNext();) {
-					if (!className.equals((String) iterMappedNames.next())) {
-						return false;
+				for (String mappedName : mappedNames) {
+					if (className.equals(mappedName)) {
+						return true;
 					}
 				}
-				return true;
+				return false;
 			}
 		};
 	}

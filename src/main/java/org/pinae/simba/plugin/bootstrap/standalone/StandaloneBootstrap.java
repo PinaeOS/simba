@@ -6,7 +6,7 @@ import org.pinae.simba.context.FileSystemResourceContext;
 import org.pinae.simba.context.ResourceContext;
 import org.pinae.simba.exception.InvokeException;
 import org.pinae.simba.exception.NoFoundException;
-import org.pinae.simba.exception.XMLParseException;
+import org.pinae.simba.exception.XmlParseException;
 import org.pinae.simba.resource.Resource;
 
 /**
@@ -21,9 +21,9 @@ public class StandaloneBootstrap {
 	 * @param args 运行参数 参数1为Bean的XML配置文件,  参数2为需要执行Bean的名称
 	 * @throws NoFoundException 
 	 * @throws InvokeException 
-	 * @throws XMLParseException 
+	 * @throws XmlParseException 
 	 */
-	public static void main(String[] args) throws InvokeException, NoFoundException, XMLParseException {
+	public static void main(String[] args) throws InvokeException, NoFoundException, XmlParseException {
 		String xmlFile = "bean-config.xml";
 		if(args.length>0 && args[0]!=null && !args[0].equals("")){
 			xmlFile = args[0];

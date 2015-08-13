@@ -6,14 +6,14 @@ package org.pinae.simba.exception;
  * @author Huiyugeng
  *
  */
-public class XMLParseException extends Exception {
+public class XmlParseException extends Exception {
 
 	private static final long serialVersionUID = -2271115202598451664L;
 	
 	/**
 	 * 构造函数
 	 */
-	public XMLParseException() {
+	public XmlParseException() {
 		super();
 	}
 
@@ -22,7 +22,7 @@ public class XMLParseException extends Exception {
 	 * 
 	 * @param message 异常提示
 	 */
-	public XMLParseException(String message) {
+	public XmlParseException(String message) {
 		super(message);
 	}
 
@@ -31,7 +31,7 @@ public class XMLParseException extends Exception {
 	 * 
 	 * @param cause 异常引发原因
 	 */
-	public XMLParseException(Throwable cause) {
+	public XmlParseException(Throwable cause) {
 		super(cause);
 	}
 
@@ -41,7 +41,7 @@ public class XMLParseException extends Exception {
 	 * @param message 异常提示
 	 * @param cause 异常引发原因
 	 */
-	public XMLParseException(String message, Throwable cause) {
+	public XmlParseException(String message, Throwable cause) {
 		super(message, cause);
 	}
 }

@@ -47,8 +47,7 @@ public class RegexPointcutAdvisor extends AbstractPointcutAdvisor {
 				
 			}
 			
-			@SuppressWarnings("rawtypes")
-			public boolean matcher(Class clazz) {
+			public boolean matcher(Class<?> clazz) {
 				String className = clazz.getName();
 				Matcher matcher = Pattern.compile(pattern).matcher(className);
 				if (matcher.find()){
