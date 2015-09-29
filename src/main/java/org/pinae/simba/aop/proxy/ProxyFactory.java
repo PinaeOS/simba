@@ -60,7 +60,7 @@ public class ProxyFactory {
 	/**
 	 * 设置由切入点驱动的通知
 	 * 
-	 * @param intercepyors 切入点驱动的通知
+	 * @param intercepyor 切入点驱动的通知
 	 */
 	public void setIntercepyor(Advice intercepyor) {
 		if (intercepyor != null) {

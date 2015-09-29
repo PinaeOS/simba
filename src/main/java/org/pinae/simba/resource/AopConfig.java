@@ -1,7 +1,7 @@
 package org.pinae.simba.resource;
 
 import org.pinae.simba.aop.proxy.ProxyFactory;
-import org.pinae.simba.beanfactory.KernelConstant;
+import org.pinae.simba.factory.KernelConstant;
 
 public class AopConfig extends BeanConfig {
 

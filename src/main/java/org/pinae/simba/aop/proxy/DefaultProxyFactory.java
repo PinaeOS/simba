@@ -17,6 +17,12 @@ import org.pinae.simba.aop.ThrowsAdvice;
 import org.pinae.simba.aop.intercept.DefaultMethodInvocation;
 import org.pinae.simba.aop.pointcut.TruePointcutAdvisor;
 
+/**
+ * 默认代理工厂类
+ * 
+ * @author Huiyugeng
+ *
+ */
 final class DefaultProxyFactory implements InvocationHandler {
 	
 	private Object target;

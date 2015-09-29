@@ -2,6 +2,7 @@ package org.pinae.simba.exception;
 
 /**
  * 类以及方法没有找到异常
+ * 
  * @author Huiyugeng
  *
  */

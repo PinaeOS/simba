@@ -30,6 +30,7 @@ public class ImportConfig {
 	 * 
 	 * @param destination 目标Bean配置信息
 	 * @param source 源Bean配置信息
+	 * 
 	 * @return 合并后的Bean配置信息
 	 */
 	public Resource mergeResource(Resource destination, Resource source){

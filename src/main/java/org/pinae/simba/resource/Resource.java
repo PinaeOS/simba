@@ -16,6 +16,7 @@ public class Resource {
 	 * 根据Bean的名称从Bean池中返回Bean的配置
 	 * 
 	 * @param beanName Bean名称
+	 * 
 	 * @return Bean配置
 	 */
 	public BeanConfig getBeanConfig(String beanName){

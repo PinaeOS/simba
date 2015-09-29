@@ -2,11 +2,12 @@ package org.pinae.simba.context;
 
 import java.net.URL;
 
-import org.pinae.simba.beanfactory.BeanFactory;
 import org.pinae.simba.exception.NoFoundException;
+import org.pinae.simba.factory.BeanFactory;
 
 /**
  * 
+ * Bean资源管理
  * 
  * @author Huiyugeng
  *

@@ -10,6 +10,8 @@ import org.pinae.simba.exception.XmlParseException;
 import org.pinae.simba.resource.Resource;
 
 /**
+ * Bean启动执行
+ * 
  * @author Huiyugeng
  *
  */
@@ -19,9 +21,10 @@ public class StandaloneBootstrap {
 	 * 执行Bean
 	 * 
 	 * @param args 运行参数 参数1为Bean的XML配置文件,  参数2为需要执行Bean的名称
-	 * @throws NoFoundException 
-	 * @throws InvokeException 
-	 * @throws XmlParseException 
+	 * 
+	 * @throws NoFoundException 无法找到对应的配置文件异常
+	 * @throws InvokeException 调用失败异常
+	 * @throws XmlParseException XML解析异常
 	 */
 	public static void main(String[] args) throws InvokeException, NoFoundException, XmlParseException {
 		String xmlFile = "bean-config.xml";

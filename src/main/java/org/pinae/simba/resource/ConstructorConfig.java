@@ -15,7 +15,7 @@ public class ConstructorConfig {
 	 * 构造函数
 	 * 
 	 * @param parameter 构造函数中的参数
-	 * @param parameter_type 构造函数的参数类型
+	 * @param parameterType 构造函数的参数类型
 	 * @param size 构造函数的参数个数
 	 */
 	public ConstructorConfig(Object[] parameter, Object[] parameterType, int size) {
@@ -36,7 +36,7 @@ public class ConstructorConfig {
 	/**
 	 * 设置构造函数的参数
 	 * 
-	 * @param parameter
+	 * @param parameter 构造函数的参数
 	 */
 	public void setParameter(Object[] parameter) {
 		this.parameter = parameter;
@@ -60,6 +60,7 @@ public class ConstructorConfig {
 	
 	/**
 	 * 返回构造函数的参数类型
+	 * 
 	 * @return 构造函数的参数类型 
 	 */
 	public Object[] getParameterType() {
@@ -67,7 +68,8 @@ public class ConstructorConfig {
 	}
 	/**
 	 * 设置构造函数的参数类型 
-	 * @param parameter_type 构造函数的参数类型 
+	 * 
+	 * @param parameterType 构造函数的参数类型 
 	 */
 	public void setParameterType(Object[] parameterType) {
 		this.parameterType = parameterType;

@@ -209,13 +209,13 @@ public class BeanConfig {
 	 * @return Bean的超时时间(ms)
 	 */
 	public long getTimeout() {
-		long _timeout = 0;
+		long timeout = 0;
 		try {
-			_timeout = Long.parseLong(timeout);
+			timeout = Long.parseLong(this.timeout);
 		} catch (NumberFormatException e) {
-			_timeout = 0;
+			timeout = 0;
 		}
-		return _timeout * 1000;
+		return timeout * 1000;
 	}
 
 	/**

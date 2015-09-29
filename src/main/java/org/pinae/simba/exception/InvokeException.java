@@ -1,13 +1,14 @@
 package org.pinae.simba.exception;
 
-/**	
-* 方法调用异常
+/**
+ * 方法调用异常
+ * 
  * @author Huiyugeng
  *
  */
 public class InvokeException extends Exception {
 	private static final long serialVersionUID = 1753747998058774540L;
-	
+
 	/**
 	 * 构造函数
 	 */

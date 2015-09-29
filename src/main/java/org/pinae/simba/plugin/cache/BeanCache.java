@@ -15,6 +15,7 @@ public class BeanCache {
 	 * 指定的Bean是否已经被缓存
 	 * 
 	 * @param beanName Bean名称
+	 * 
 	 * @return 是否已经被存入缓存池中
 	 */
 	public static boolean isCache(String beanName){
@@ -29,6 +30,7 @@ public class BeanCache {
 	 * 从缓冲取出Bean实例
 	 * 
 	 * @param beanName Bean的名称
+	 * 
 	 * @return Bean的实例
 	 */
 	public synchronized static CacheBean getBean(String beanName){
@@ -39,6 +41,7 @@ public class BeanCache {
 	 * 从缓冲移除Bean实例
 	 * 
 	 * @param beanName Bean的名称
+	 * 
 	 * @return Bean的实例
 	 */
 	public synchronized static CacheBean removeBean(String beanName){
@@ -47,7 +50,6 @@ public class BeanCache {
 	
 	/**
 	 * 从缓冲移除所有Bean实例
-	 * 
 	 */
 	public synchronized static void clear(){
 		beanCache.clear();
@@ -63,8 +65,18 @@ public class BeanCache {
 		beanCache.put(beanName, new CacheBean(beanObject));
 	}
 	
+	/**
+	 * 缓冲对象
+	 *
+	 */
 	public static class CacheBean{
+		/**
+		 * 缓冲时间戳
+		 */
 		private long timestamp;
+		/**
+		 * 缓冲的对象
+		 */
 		private Object bean;
 		
 		public CacheBean(Object bean) {

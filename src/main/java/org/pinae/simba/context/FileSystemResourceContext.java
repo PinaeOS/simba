@@ -6,10 +6,10 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.pinae.simba.beanfactory.xml.XmlBeanFactory;
 import org.pinae.simba.exception.InvokeException;
 import org.pinae.simba.exception.NoFoundException;
 import org.pinae.simba.exception.XmlParseException;
+import org.pinae.simba.factory.xml.XmlBeanFactory;
 
 /**
  * 从XML文件获得Bean资源

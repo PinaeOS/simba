@@ -24,7 +24,8 @@ public class AspectException extends RuntimeException {
 
 	/**
 	 * Constructor for AspectException.
-	 * @param s
+	 * 
+	 * @param s Exception description
 	 */
 	public AspectException(String s) {
 		super(s);
@@ -34,8 +35,9 @@ public class AspectException extends RuntimeException {
 
 	/**
 	 * Constructor for AspectException.
-	 * @param s
-	 * @param t
+	 * 
+	 * @param s Exception description
+	 * @param t Throwable
 	 */
 	public AspectException(String s, Throwable t) {
 		super(s + "; nested exception is " + t.getMessage());
@@ -48,7 +50,8 @@ public class AspectException extends RuntimeException {
 	/**
 	 * Return the root cause of this exception.
 	 * May be null
-	 * @return Throwable
+	 * 
+	 * @return Throwable Throwable
 	 */
 	public Throwable getCause() {
 		return t;
