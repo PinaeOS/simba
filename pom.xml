@@ -278,4 +278,5 @@
 			</distributionManagement>
 		</profile>
 	</profiles>
+	<description>Dependency Injection and AOP framework for Java</description>
 </project>
