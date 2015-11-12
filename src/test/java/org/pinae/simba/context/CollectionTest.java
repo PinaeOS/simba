@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
-import org.pinae.simba.SimbaTestConstant;
+import org.pinae.simba.TestConstant;
 import org.pinae.simba.context.FileSystemResourceContext;
 import org.pinae.simba.context.ResourceContext;
 import org.pinae.simba.context.resource.CollectionBean;
@@ -20,7 +20,7 @@ public class CollectionTest {
 	public void testCollection(){
 		
 		try {
-			bean = new FileSystemResourceContext(SimbaTestConstant.TEST_XML);
+			bean = new FileSystemResourceContext(TestConstant.TEST_XML);
 		} catch (NoFoundException e) {
 			fail(e.getMessage());
 		} catch (XmlParseException e) {

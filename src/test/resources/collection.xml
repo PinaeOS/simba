@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="bean.xsd">
+
+	<bean name="CollectionBean" class="org.pinae.simba.context.resource.CollectionBean">
+		<property name="list">
+			<list class="java.util.ArrayList">
+				<value>1</value>
+				<value>2</value>
+				<value>3</value>
+				<value>4</value>
+				<reflection>Name</reflection>
+			</list>
+		</property>
+		<property name="set">
+			<set class="java.util.HashSet">
+				<value>1</value>
+				<value>2</value>
+				<value>3</value>
+				<value>4</value>
+				<value>5</value>
+				<reflection>Name</reflection>
+			</set>
+		</property>
+		<property name="collection">
+			<collection class="java.util.ArrayList">
+				<value>13343351822</value>
+				<value>13240493917</value>
+				<value>13702550417</value>
+			</collection>
+		</property>
+	</bean>
+
+
+</beans>

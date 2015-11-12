@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
-import org.pinae.simba.SimbaTestConstant;
+import org.pinae.simba.TestConstant;
 import org.pinae.simba.aop.pointcut.resource.ITarget;
 
 public class AopTest {
@@ -15,7 +15,7 @@ public class AopTest {
 	public void testNameMatcherPointcutAdvisor() {
 		
 		try {
-			bean = new FileSystemResourceContext(SimbaTestConstant.TEST_AOP_XML);
+			bean = new FileSystemResourceContext(TestConstant.TEST_AOP_XML);
 			
 			ITarget target = (ITarget)bean.getBean("NameMatcherPointcutAdvisorTest");
 			assertEquals(target.sayHello("Hui"), "Hello Hui");

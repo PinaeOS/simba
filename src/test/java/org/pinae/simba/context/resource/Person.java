@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 
 public class Person {
 	
-	private static Logger log = Logger.getLogger(Person.class);
+	private static Logger logger = Logger.getLogger(Person.class);
 	
 	private Name name;
 	private int age;
@@ -54,7 +54,7 @@ public class Person {
 	}
 	
 	public void create(){
-		log.debug("Create Person Bean");
+		logger.debug("Create Person Bean");
 	}
 	
 	public void run(){
@@ -62,7 +62,7 @@ public class Person {
 	}
 	
 	public void destroy(){
-		log.debug("Destory Person Bean");
+		logger.debug("Destory Person Bean");
 	}
 	
 }
