@@ -57,8 +57,8 @@ public class XmlBeanFactory extends BasicBeanFactory {
 	 */
 	public void setResourcePath(InputStream xmlStream, boolean validateXml) throws XmlParseException {
 		this.xmlFile = xmlStream;
-		beanConfig = XmlResourceParser.getConfig(this.xmlFile, validateXml);
-		super.setConfig(beanConfig);
+		XmlBeanFactory.beanConfig = XmlResourceParser.getConfig(this.xmlFile, validateXml);
+		super.setConfig(XmlBeanFactory.beanConfig);
 	}
 
 	/**

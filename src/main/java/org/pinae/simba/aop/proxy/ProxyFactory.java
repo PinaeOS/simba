@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
  *
  */
 public class ProxyFactory {
-	protected final Logger log = Logger.getLogger("ProxyFactoryBean");
+	protected final Logger logger = Logger.getLogger("ProxyFactoryBean");
 
 	private Object target;
 	private List<Advice> intercepyors;
