@@ -34,7 +34,7 @@ import org.pinae.simba.resource.collection.SetItem;
  */
 public class BasicBeanFactory implements BeanFactory, KernelConstant {
 
-	private Resource config = null;
+	private Resource config;
 
 	/**
 	 * 构造函数
@@ -85,6 +85,10 @@ public class BasicBeanFactory implements BeanFactory, KernelConstant {
 	public Object getBean(String beanname) throws InvokeException, NoFoundException {
 		
 		BeanConfig beanConfig = config.getBeanConfig(beanname);
+		
+		if (beanConfig == null) {
+			throw new NullPointerException("Not such Bean:" + beanname);
+		}
 
 		Class beanClass = null;
 		Object beanObject = null;
@@ -180,7 +184,7 @@ public class BasicBeanFactory implements BeanFactory, KernelConstant {
 		Class factoryBean = Class.forName((String) beanConfig.getFactoryBean());
 		Method factoryMethod = factoryBean.getMethod(beanConfig.getFactoryMethod(), null);
 		Object factoryObject = factoryBean.newInstance();
-		return (factoryMethod.invoke(factoryObject, null));
+		return factoryMethod.invoke(factoryObject, null);
 	}
 
 	/*
@@ -190,23 +194,30 @@ public class BasicBeanFactory implements BeanFactory, KernelConstant {
 	private Object constructor(Class cls, ConstructorConfig config) throws InstantiationException, IllegalAccessException, SecurityException,
 			NoSuchMethodException, ClassNotFoundException, IllegalArgumentException, InvocationTargetException, InvokeException, NoFoundException {
 
-		Constructor[] constructors = cls.getDeclaredConstructors();
+		Object[] parameterValues = new Object[config.getSize()];
+		System.arraycopy(config.getParameter(), 0, parameterValues, 0, config.getSize());
+		
 		// 如果构造函数的参数类型为REFLECTION, 则生成对应的类写在ConstructorConfig的parameter中
 		for (int i = 0; i < config.getParameter().length; i++) {
 			if (config.getParameterType()[i].equals(PROPERTY_REFLECTION)) {
-				config.getParameter()[i] = getBean((String) config.getParameter()[i]);
+				Object parameterValue = parameterValues[i];
+				if (parameterValue != null) {
+					parameterValues[i] = getBean(parameterValue.toString());
+				}
 			}
 		}
 
 		// 当有多个构造函数时, 需要判断哪个构造函数适合, flag是判断构造函数时候满足注入的类型
 		boolean flag = false;
+		Constructor[] constructors = cls.getDeclaredConstructors();
 		for (int i = 0; i < constructors.length; i++) {
-			if (config.getSize() == constructors[i].getParameterTypes().length) {
+			Constructor constructor = constructors[i];
+			// 匹配构造函数的参数数量
+			if (config.getSize() == constructor.getParameterTypes().length) {
 				Class[] parameterTypes = new Class[config.getSize()];
-				Object[] parameterValues = config.getParameter();
 
-				for (int j = 0; j < constructors[i].getParameterTypes().length; j++) {
-					parameterTypes[j] = constructors[i].getParameterTypes()[j];
+				for (int j = 0; j < constructor.getParameterTypes().length; j++) {
+					parameterTypes[j] = constructor.getParameterTypes()[j];
 					if (parameterTypes[j].equals(parameterValues[j].getClass())) {
 						flag = true;
 					} else {
@@ -214,6 +225,14 @@ public class BasicBeanFactory implements BeanFactory, KernelConstant {
 					}
 				}
 				if (flag) {
+					// 基本值转换
+					for (int j = 0; j < parameterValues.length; j++) {
+						Class parameterType = parameterTypes[j];
+						if (TypeConver.isBasicType(parameterType)) {
+							parameterValues[j] = TypeConver.converValue(parameterTypes[j], parameterValues[j]);
+						}
+					}
+					// 使用构造函数构造实例
 					return constructors[i].newInstance(parameterValues);
 				}
 			}

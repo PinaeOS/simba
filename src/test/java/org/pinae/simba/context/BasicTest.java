@@ -33,14 +33,27 @@ public class BasicTest {
 			
 			assertEquals(person.getName().getLastName(),"hui");
 			assertEquals(person.getName().getFirstName(),"yugeng");
-			assertEquals(person.getAge(), 28);
+			assertEquals(person.getAge(), 27);
 			assertEquals(person.getEmail(), "interhui@21cn.com");
 			assertEquals(person.getAddress().getCountry(), "China");
 			assertEquals(person.isAdmin(), true);
+			assertEquals(person.getAddress().getPostCode().getCode(), 528000);
+			assertEquals(person.getAddress().getPostCode().isActive(), true);
+			assertEquals(person.getAddress().getPostCode().getStation(), "103011");
 			
 			Thread.sleep(5000);
 			
 			person = (Person)bean.getBean("PersonFactory");
+			
+			assertEquals(person.getName().getLastName(),"hui");
+			assertEquals(person.getName().getFirstName(),"yugeng");
+			assertEquals(person.getAge(), 27);
+			assertEquals(person.getEmail(), "interhui@21cn.com");
+			assertEquals(person.getAddress().getCountry(), "China");
+			assertEquals(person.isAdmin(), true);
+			assertEquals(person.getAddress().getPostCode().getCode(), 528000);
+			assertEquals(person.getAddress().getPostCode().isActive(), true);
+			assertEquals(person.getAddress().getPostCode().getStation(), "103011");
 			
 		} catch (InvokeException e) {
 			fail(e.getMessage());

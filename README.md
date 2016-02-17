@@ -62,7 +62,7 @@ Java Bean:
 
 	public class Person {
 		
-		private static Logger log = Logger.getLogger(Person.class);
+		private static Logger logger = Logger.getLogger(Person.class);
 		
 		private Name name;
 		private int age;
@@ -131,7 +131,7 @@ Java Program:
 
 	public class DemoTestManager {
 	
-		private static Logger log = Logger.getLogger(DemoTestManager.class);
+		private static Logger logger = Logger.getLogger(DemoTestManager.class);
 	
 		public static void main(String arg[]) throws Exception {
 			ResourceContext bean = new FileSystemResourceContext("Person.xml");

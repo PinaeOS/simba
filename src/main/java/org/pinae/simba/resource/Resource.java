@@ -10,7 +10,7 @@ import java.util.Set;
  *
  */
 public class Resource {
-	private static Map<String, Object> beanList = new HashMap<String, Object>();
+	private Map<String, Object> beanList = new HashMap<String, Object>();
 	
 	/**
 	 * 根据Bean的名称从Bean池中返回Bean的配置
@@ -47,7 +47,7 @@ public class Resource {
 	 * 
 	 * @return Bean的名称集合
 	 */
-	public Set getBeanNameList(){
+	public Set<String> getBeanNameList(){
 		return beanList.keySet();
 	}
 	
@@ -56,7 +56,7 @@ public class Resource {
 	 * 
 	 * @return Bean池中的所有Bean
 	 */
-	public Map getBeanList(){
+	public Map<String, Object> getBeanList(){
 		return beanList;
 	}
 }

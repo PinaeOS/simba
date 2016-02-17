@@ -1,7 +1,7 @@
 package org.pinae.simba.plugin.cache;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 /**
  * Bean缓存池
  * 
@@ -9,7 +9,7 @@ import java.util.Map;
  *
  */
 public class BeanCache {
-	private static Map<String, CacheBean> beanCache = new HashMap<String, CacheBean>();
+	private static Map<String, CacheBean> BEAN_CACHE = new ConcurrentHashMap<String, CacheBean>();
 
 	/**
 	 * 指定的Bean是否已经被缓存
@@ -19,7 +19,7 @@ public class BeanCache {
 	 * @return 是否已经被存入缓存池中
 	 */
 	public static boolean isCache(String beanName){
-		if(beanCache.get(beanName)!=null){
+		if(BEAN_CACHE.get(beanName)!=null){
 			return true;
 		}else{
 			return false;
@@ -34,7 +34,7 @@ public class BeanCache {
 	 * @return Bean的实例
 	 */
 	public synchronized static CacheBean getBean(String beanName){
-		return beanCache.get(beanName);
+		return BEAN_CACHE.get(beanName);
 	}
 	
 	/**
@@ -45,14 +45,14 @@ public class BeanCache {
 	 * @return Bean的实例
 	 */
 	public synchronized static CacheBean removeBean(String beanName){
-		return beanCache.remove(beanName);
+		return BEAN_CACHE.remove(beanName);
 	}
 	
 	/**
 	 * 从缓冲移除所有Bean实例
 	 */
 	public synchronized static void clear(){
-		beanCache.clear();
+		BEAN_CACHE.clear();
 	}
 	
 	/**
@@ -62,21 +62,16 @@ public class BeanCache {
 	 * @param beanObject Bean的实例
 	 */
 	public synchronized static void addBean(String beanName, Object beanObject){
-		beanCache.put(beanName, new CacheBean(beanObject));
+		BEAN_CACHE.put(beanName, new CacheBean(beanObject));
 	}
 	
 	/**
 	 * 缓冲对象
-	 *
 	 */
 	public static class CacheBean{
-		/**
-		 * 缓冲时间戳
-		 */
+		/* 缓冲时间戳 */
 		private long timestamp;
-		/**
-		 * 缓冲的对象
-		 */
+		/* 缓冲的对象 */
 		private Object bean;
 		
 		public CacheBean(Object bean) {

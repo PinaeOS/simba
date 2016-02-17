@@ -33,6 +33,9 @@
 	</bean>
 	
 	<bean name="Address" class="org.pinae.simba.context.resource.Address">
+		<constructor>
+			<reflection>PostCode</reflection>
+		</constructor>
 		<property name="country">
 			<value>China</value>
 		</property>
@@ -42,5 +45,13 @@
 		<property name="city">
 			<value><null/></value>
 		</property>
+	</bean>
+	
+	<bean name="PostCode" class="org.pinae.simba.context.resource.PostCode">
+		<constructor>
+			<value type="int">528000</value>
+			<value type="boolean">true</value>
+			<value type="string">103011</value>
+		</constructor>
 	</bean>
 </beans>

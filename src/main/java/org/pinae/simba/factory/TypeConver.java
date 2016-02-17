@@ -17,6 +17,17 @@ public class TypeConver {
 	/**
 	 * 判断该字段类型是否为基本类型
 	 * 
+	 * @param type 字段类型类
+	 * 
+	 * @return 是否基本类型
+	 */
+	public static boolean isBasicType(Class<?> type) {
+		return isBasicType(type.getName());
+	}
+	
+	/**
+	 * 判断该字段类型是否为基本类型
+	 * 
 	 * @param type 字段类型
 	 * @return 是否基本类型
 	 */
@@ -28,12 +39,28 @@ public class TypeConver {
 		}
 		return false;
 	}
+	
+	/**
+	 * 根据类型进行值转换
+	 * 
+	 * @param type 字段类型
+	 * @param value 需要转换值
+	 * 
+	 * @return 转换后的值
+	 */
+	public static Object converValue(Class<?> type, Object value) {
+		if (type != null && value != null) {
+			return converValue(type.getName(), value.toString());
+		}
+		return value;
+	}
 
 	/**
 	 * 根据类型进行值转换
 	 * 
 	 * @param type 字段类型
 	 * @param value 需要转换值
+	 * 
 	 * @return 转换后的值
 	 */
 	public static Object converValue(String type, String value) {
@@ -70,7 +97,6 @@ public class TypeConver {
 	 * @param type 类型描述
 	 * 
 	 * @return 类型所对应的Class
-	 * 
 	 * @throws ClassNotFoundException 无法找到对应的类
 	 */
 	public static Class getTypeClass(String type) throws ClassNotFoundException {

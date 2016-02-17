@@ -10,8 +10,10 @@
 	
 	<bean name="" class="" create="" run="" singleton="true">
 		<constructor>
+			<value type=""/>
 			<value class=""/>
 			<value/>
+			<reflection/>
 		</constructor>
 	</bean>
 	<bean name="" class="" singleton="false" factory-bean="" factory-method="">

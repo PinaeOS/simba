@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -31,9 +32,9 @@ import org.pinae.simba.resource.collection.SetItem;
  */
 public class XmlResourceParser implements XmlConstant, CollectionConstant {
 
-	private static SAXBuilder builder;
-	private static Document doc;
-	private static String schemaFile;
+	private String schemaFile;
+	
+	private Resource resource = new Resource();
 
 	/**
 	 * 从XML文件流获得Bean的配置信息
@@ -44,9 +45,10 @@ public class XmlResourceParser implements XmlConstant, CollectionConstant {
 	 * @return 返回XML配置
 	 * @throws XmlParseException XML解析发生的异常
 	 */
-	public static Resource getConfig(InputStream xml, boolean validateXml) throws XmlParseException {
+	public Resource getConfig(InputStream xml, boolean validateXml) throws XmlParseException {
+		Document doc = null;
 		try {
-			builder = new SAXBuilder(validateXml);
+			SAXBuilder builder = new SAXBuilder(validateXml);
 
 			if (validateXml) {
 				builder.setFeature(schemaFeatures, true);
@@ -63,7 +65,6 @@ public class XmlResourceParser implements XmlConstant, CollectionConstant {
 			throw new XmlParseException(e);
 		}
 
-		Resource resource = new Resource();
 		Element root = doc.getRootElement();
 
 		Object[] beans = root.getChildren().toArray();
@@ -76,21 +77,21 @@ public class XmlResourceParser implements XmlConstant, CollectionConstant {
 				importConfig.setUrl(bean.getAttributeValue(URL));
 				try {
 					String url = bean.getAttributeValue(URL);
-					importResource = XmlResourceParser.getConfig(new FileInputStream(url), validateXml);
+					importResource = getConfig(new FileInputStream(url), validateXml);
 				} catch (FileNotFoundException e) {
 					throw new XmlParseException(e);
 				}
-				importConfig.mergeResource(resource, importResource);
+				importConfig.mergeResource(this.resource, importResource);
 			} else if (bean.getName().equalsIgnoreCase(BEAN)) {
-				resource.addBeanConfig(bean.getAttributeValue(NAME), getBean(bean));
+				this.resource.addBeanConfig(bean.getAttributeValue(NAME), getBean(bean));
 			} else if (bean.getName().equalsIgnoreCase(AOP)) {
-				resource.addBeanConfig(bean.getAttributeValue(NAME), getAopBean(bean));
+				this.resource.addBeanConfig(bean.getAttributeValue(NAME), getAopBean(bean));
 			}
 		}
-		return resource;
+		return this.resource;
 	}
 
-	private static BeanConfig getBean(Element bean) {
+	private BeanConfig getBean(Element bean) {
 		BeanConfig beanConfig = new BeanConfig();
 
 		beanConfig.setBeanName(bean.getAttributeValue(NAME));
@@ -118,7 +119,7 @@ public class XmlResourceParser implements XmlConstant, CollectionConstant {
 		return beanConfig;
 	}
 	
-	private static BeanConfig getAopBean(Element bean) {
+	private BeanConfig getAopBean(Element bean) {
 		AopConfig aopConfig = new AopConfig();
 		
 		aopConfig.setBeanName(bean.getAttributeValue(NAME));
@@ -136,51 +137,62 @@ public class XmlResourceParser implements XmlConstant, CollectionConstant {
 		return aopConfig;
 	}
 
-	private static ConstructorConfig getConstructor(Element constructor) {
+	private ConstructorConfig getConstructor(Element constructor) {
 		Object[] parameters = constructor.getChildren().toArray();
 
 		if (parameters.length > 0) {
-			List<Object> parameter_list = new ArrayList<Object>();
-			List<Object> parameter_type = new ArrayList<Object>();
+			List<Object> parameterList = new ArrayList<Object>();
+			List<Object> parameterType = new ArrayList<Object>();
 			for (Object parameter : parameters) {
-				Element _parameter = (Element) parameter;
-				parameter_type.add(_parameter.getName());
-				parameter_list.add(_parameter.getText());
+				Element param = (Element) parameter;
+				String paramType = param.getAttributeValue(VALUE_TYPE);
+				if (StringUtils.isEmpty(paramType)) {
+					paramType = param.getName();
+				}
+				String paramValue = param.getText();
+				parameterType.add(paramType);
+				parameterList.add(paramValue);
 			}
-			return new ConstructorConfig(parameter_list.toArray(), parameter_type.toArray(), parameters.length);
+			return new ConstructorConfig(parameterList.toArray(), parameterType.toArray(), parameters.length);
 		} else {
 			return new ConstructorConfig(null, null, 0);
 		}
 	}
 
-	private static PropertyConfig getProperty(Element property) {
+	private PropertyConfig getProperty(Element property) {
 		PropertyConfig propertyConfig = new PropertyConfig();
-		String valueType = ((Element) property.getChildren().get(0)).getName();
+		String propertyType = ((Element) property.getChildren().get(0)).getName();
 		propertyConfig.setPropertyName(property.getAttributeValue(NAME));
 
-		if (valueType.equalsIgnoreCase(PROPERTY_VALUE)) {
+		if (propertyType.equalsIgnoreCase(PROPERTY_VALUE)) {
 			propertyConfig.setPropertyType(PROPERTY_VALUE);
 			if (property.getChild(PROPERTY_VALUE).getChildren().size() > 0) {
 				propertyConfig.setPropertyValue(null);
 			} else {
-				propertyConfig.setPropertyValue(property.getChild(PROPERTY_VALUE).getText());
+				Element propertyValue = property.getChild(PROPERTY_VALUE);
+				String value = propertyValue.getText();
+				String valueType = propertyValue.getAttributeValue(VALUE_TYPE);
+				propertyConfig.setPropertyValue(value);
+				if (StringUtils.isNotEmpty(valueType)) {
+					propertyConfig.setPropertyType(valueType);
+				}
 			}
-		} else if (valueType.equalsIgnoreCase(PROPERTY_REFLECTION)) {
+		} else if (propertyType.equalsIgnoreCase(PROPERTY_REFLECTION)) {
 			propertyConfig.setPropertyType(PROPERTY_REFLECTION);
 			propertyConfig.setPropertyValue(property.getChild(PROPERTY_REFLECTION).getText());
-		} else if (valueType.equalsIgnoreCase(PROPERTY_MAP)) {
+		} else if (propertyType.equalsIgnoreCase(PROPERTY_MAP)) {
 			propertyConfig.setPropertyType(PROPERTY_MAP);
 			propertyConfig.setCollectionClass(property.getChild(PROPERTY_MAP).getAttributeValue(CLASS));
 			propertyConfig.setCollectionItem(getMap(property.getChild(PROPERTY_MAP)));
-		} else if (valueType.equalsIgnoreCase(PROPERTY_LIST)) {
+		} else if (propertyType.equalsIgnoreCase(PROPERTY_LIST)) {
 			propertyConfig.setPropertyType(PROPERTY_LIST);
 			propertyConfig.setCollectionClass(property.getChild(PROPERTY_LIST).getAttributeValue(CLASS));
 			propertyConfig.setCollectionItem(getList(property.getChild(PROPERTY_LIST)));
-		} else if (valueType.equalsIgnoreCase(PROPERTY_SET)) {
+		} else if (propertyType.equalsIgnoreCase(PROPERTY_SET)) {
 			propertyConfig.setPropertyType(PROPERTY_SET);
 			propertyConfig.setCollectionClass(property.getChild(PROPERTY_SET).getAttributeValue(CLASS));
 			propertyConfig.setCollectionItem(getSet(property.getChild(PROPERTY_SET)));
-		} else if (valueType.equalsIgnoreCase(PROPERTY_COLLECTION)) {
+		} else if (propertyType.equalsIgnoreCase(PROPERTY_COLLECTION)) {
 			propertyConfig.setPropertyType(PROPERTY_COLLECTION);
 			propertyConfig.setCollectionClass(property.getChild(PROPERTY_COLLECTION).getAttributeValue(CLASS));
 			propertyConfig.setCollectionItem(getCollection(property.getChild(PROPERTY_COLLECTION)));
@@ -189,7 +201,7 @@ public class XmlResourceParser implements XmlConstant, CollectionConstant {
 		return propertyConfig;
 	}
 
-	private static Object[] getMap(Element map) {
+	private Object[] getMap(Element map) {
 		Object[] entities = map.getChildren().toArray();
 		EntityItem[] entitySet = new EntityItem[entities.length];
 
@@ -206,7 +218,7 @@ public class XmlResourceParser implements XmlConstant, CollectionConstant {
 		return entitySet;
 	}
 
-	private static Object[] getList(Element list) {
+	private Object[] getList(Element list) {
 		Object[] items = list.getChildren().toArray();
 		ListItem[] itemSet = new ListItem[items.length];
 
@@ -223,7 +235,7 @@ public class XmlResourceParser implements XmlConstant, CollectionConstant {
 
 	}
 
-	private static Object[] getSet(Element set) {
+	private Object[] getSet(Element set) {
 		Object[] items = set.getChildren().toArray();
 		SetItem[] itemSet = new SetItem[items.length];
 
@@ -240,7 +252,7 @@ public class XmlResourceParser implements XmlConstant, CollectionConstant {
 
 	}
 
-	private static Object[] getCollection(Element collection) {
+	private Object[] getCollection(Element collection) {
 		Object[] items = collection.getChildren().toArray();
 		CollectionItem[] itemSet = new CollectionItem[items.length];
 
@@ -261,7 +273,7 @@ public class XmlResourceParser implements XmlConstant, CollectionConstant {
 	 * 
 	 * @param schemaFile 验证文件的路径
 	 */
-	protected static void setSchemaFile(String schemaFile) {
-		XmlResourceParser.schemaFile = schemaFile;
+	protected void setSchemaFile(String schemaFile) {
+		this.schemaFile = schemaFile;
 	}
 }

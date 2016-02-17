@@ -12,7 +12,7 @@ public class Person {
 	private String email;
 	
 	private boolean admin;
-
+	
 	public Name getName() {
 		return name;
 	}
@@ -58,7 +58,7 @@ public class Person {
 	}
 	
 	public void run(){
-		this.age ++;
+		logger.debug("Run Person Bean");
 	}
 	
 	public void destroy(){

@@ -16,16 +16,16 @@ import org.pinae.simba.resource.Resource;
  */
 public class XmlBeanFactory extends BasicBeanFactory {
 
-	private static Resource beanConfig = null;
 	private InputStream xmlFile = null;
+	private XmlResourceParser parser = null;
 
 	/**
 	 * 设置验证文件的路径
 	 * 
 	 * @param schemaFile 验证文件的路径
 	 */
-	protected static void setSchemaFile(String schemaFile) {
-		XmlResourceParser.setSchemaFile(schemaFile);
+	public void setSchemaFile(String schemaFile) {
+		this.parser.setSchemaFile(schemaFile);
 	}
 
 	/**
@@ -57,8 +57,8 @@ public class XmlBeanFactory extends BasicBeanFactory {
 	 */
 	public void setResourcePath(InputStream xmlStream, boolean validateXml) throws XmlParseException {
 		this.xmlFile = xmlStream;
-		XmlBeanFactory.beanConfig = XmlResourceParser.getConfig(this.xmlFile, validateXml);
-		super.setConfig(XmlBeanFactory.beanConfig);
+		Resource beanConfig = new XmlResourceParser().getConfig(this.xmlFile, validateXml);
+		super.setConfig(beanConfig);
 	}
 
 	/**

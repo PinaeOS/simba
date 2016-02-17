@@ -23,6 +23,7 @@ public interface KernelConstant {
 	static final String CONSTRUCTOR = "constructor";
 	static final String PROPERTY = "property";
 	static final String PROPERTY_VALUE = "value";
+	static final String VALUE_TYPE = "type";
 	static final String PROPERTY_REFLECTION = "reflection";
 	static final String PROPERTY_MAP = "map";
 	static final String PROPERTY_MAP_KEY = "key";

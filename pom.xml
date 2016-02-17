@@ -71,7 +71,7 @@
 	</scm>
 
 	<build>
-		<finalName>simba-1.2</finalName>
+		<finalName>simba</finalName>
 
 		<pluginManagement>
 			<plugins>
