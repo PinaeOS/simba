@@ -71,8 +71,6 @@
 	</scm>
 
 	<build>
-		<finalName>simba</finalName>
-
 		<pluginManagement>
 			<plugins>
 
